@@ -1,7 +1,7 @@
 package benchs
 
 import (
-	"github.com/jackc/pgx/v4"
+	"github.com/jackc/pgx/v5"
 )
 
 var pgxdb *pgx.Conn
@@ -16,7 +16,7 @@ func init() {
 		st.AddBenchmark("MultiRead limit 100", 200*OrmMulti, PgxReadSlice)
 
 		db, err := pgx.Connect(ctx, OrmSource)
-		CheckErr(err)
+		CheckErr(err, st.benchs...)
 
 		pgxdb = db
 	}

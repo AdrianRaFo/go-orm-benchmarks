@@ -14,8 +14,8 @@ for operation in "${operations[@]}"; do
     echo "[go-orm-benchmarks] DBG: Benchmarks for ${operation[0]} is running at the moment."
 
     # Build & Run Container
-    docker-compose build --build-arg MULTI=${operation[1]} &>/dev/null
-    docker-compose up --exit-code-from benchmarker
+    docker compose build --build-arg MULTI=${operation[1]} &>/dev/null
+    docker compose up --exit-code-from benchmarker
 
     # Apply output to template
     logs=$(docker logs go-orm-benchmarks-benchmarker-1 --tail 102) 

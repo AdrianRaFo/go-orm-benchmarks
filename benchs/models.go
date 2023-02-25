@@ -8,13 +8,13 @@ import (
 // Model for GORM, GORP, Beego, Bun, Pg, Raw, Sqlc, Ent
 type Model struct {
 	Id      int `orm:"auto" gorm:"primary_key" db:"id" bun:",pk,autoincrement"`
-	Name    string
-	Title   string
-	Fax     string
-	Web     string
-	Age     int
-	Right   bool
-	Counter int64
+	Name    string `db:"name"`
+	Title   string `db:"title"`
+	Fax     string `db:"fax"`
+	Web     string `db:"web"`
+	Age     int `db:"age"`
+	Right   bool `db:"right"`
+	Counter int64 `db:"counter"`
 }
 
 func (m *Model) TableName() string {

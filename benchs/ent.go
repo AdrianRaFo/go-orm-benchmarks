@@ -7,7 +7,7 @@ import (
 	entsql "entgo.io/ent/dialect/sql"
 	"github.com/efectn/go-orm-benchmarks/benchs/ent"
 	"github.com/efectn/go-orm-benchmarks/benchs/ent/model"
-	_ "github.com/jackc/pgx/v4/stdlib"
+	_ "github.com/jackc/pgx/v5/stdlib"
 )
 
 var client *ent.Client
@@ -33,7 +33,7 @@ func init() {
 
 		var err error
 		dbEnt, err = sql.Open("pgx", OrmSource)
-		CheckErr(err)
+		CheckErr(err, st.benchs...)
 
 		// Create an ent.Driver from `dbEnt`.
 		drv := entsql.OpenDB(dialect.Postgres, dbEnt)
@@ -62,7 +62,7 @@ func EntInsert(b *B) {
 			SetCounter(m.Counter).
 			Save(ctx)
 
-		CheckErr(err)
+		CheckErr(err, b)
 	}
 }
 
@@ -90,7 +90,7 @@ func EntInsertMulti(b *B) {
 
 	for i := 0; i < b.N; i++ {
 		_, err := client.Model.CreateBulk(bulk...).Save(ctx)
-		CheckErr(err)
+		CheckErr(err, b)
 
 	}
 }
@@ -110,7 +110,7 @@ func EntUpdate(b *B) {
 			SetCounter(m.Counter).
 			Save(ctx)
 
-		CheckErr(err)
+		CheckErr(err, b)
 	})
 
 	for i := 0; i < b.N; i++ {
@@ -125,7 +125,7 @@ func EntUpdate(b *B) {
 			SetCounter(m.Counter).
 			Save(ctx)
 
-		CheckErr(err)
+		CheckErr(err, b)
 	}
 }
 
@@ -144,12 +144,12 @@ func EntRead(b *B) {
 			SetCounter(m.Counter).
 			Save(ctx)
 
-		CheckErr(err)
+		CheckErr(err, b)
 	})
 
 	for i := 0; i < b.N; i++ {
 		_, err := client.Model.Query().Where(model.IDEQ(1)).First(ctx)
-		CheckErr(err)
+		CheckErr(err, b)
 	}
 }
 
@@ -169,13 +169,13 @@ func EntReadSlice(b *B) {
 				SetCounter(m.Counter).
 				Save(ctx)
 
-			CheckErr(err)
+			CheckErr(err, b)
 		}
 	})
 
 	for i := 0; i < b.N; i++ {
 		_, err := client.Model.Query().Where(model.IDGT(0)).Unique(false).Limit(100).All(ctx)
 
-		CheckErr(err)
+		CheckErr(err, b)
 	}
 }

@@ -4,9 +4,9 @@ import (
 	"database/sql"
 	"fmt"
 
-	_ "github.com/jackc/pgx/v4/stdlib"
+	_ "github.com/jackc/pgx/v5/stdlib"
 	_ "github.com/lib/pq"
-	gorpware "gopkg.in/gorp.v1"
+	gorpware "github.com/go-gorp/gorp/v3"
 )
 
 var gorp *gorpware.DbMap
@@ -21,7 +21,7 @@ func init() {
 		st.AddBenchmark("MultiRead limit 100", 200*OrmMulti, GorpReadSlice)
 
 		db, err := sql.Open("pgx", OrmSource)
-		CheckErr(err)
+		CheckErr(err, st.benchs...)
 
 		gorp = &gorpware.DbMap{Db: db, Dialect: gorpware.PostgresDialect{}}
 

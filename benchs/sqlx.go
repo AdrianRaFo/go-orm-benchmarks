@@ -28,7 +28,7 @@ func init() {
 		st.AddBenchmark("MultiRead limit 100", 200*OrmMulti, SqlxReadSlice)
 
 		db, err := sqlx.Connect("postgres", OrmSource)
-		CheckErr(err)
+		CheckErr(err, st.benchs...)
 
 		sqlxdb = db
 	}

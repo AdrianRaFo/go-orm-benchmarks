@@ -36,7 +36,7 @@ func init() {
 			DisableTransaction: true,
 		}
 		_, err := zorm.NewDBDao(&dbDaoConfig)
-		CheckErr(err)
+		CheckErr(err, st.benchs...)
 	}
 }
 

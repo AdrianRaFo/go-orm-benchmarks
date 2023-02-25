@@ -16,7 +16,7 @@ func init() {
 		st.AddBenchmark("MultiRead limit 100", 200*OrmMulti, XormReadSlice)
 
 		engine, err := xorm.NewEngine("postgres", OrmSource)
-		CheckErr(err)
+		CheckErr(err, st.benchs...)
 
 		xo = engine.NewSession()
 	}

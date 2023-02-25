@@ -5,7 +5,7 @@ import (
 	"log"
 	"strings"
 
-	_ "github.com/jackc/pgx/v4/stdlib"
+	_ "github.com/jackc/pgx/v5/stdlib"
 )
 
 var (
@@ -50,7 +50,7 @@ func SplitSource() map[string]string {
 
 func CheckErr(err error, b ...*B) {
 	if err != nil {
-		log.Fatalf("[go-orm-benchmarks] ERR: %v", err)
+		log.Fatalf("[go-orm-benchmarks] ERR: %v %T", err, b)
 
 		if len(b) > 0 {
 			b[0].FailNow()

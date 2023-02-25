@@ -25,7 +25,7 @@ func init() {
 			PrepareStmt:            true,
 			Logger:                 logger.Default.LogMode(logger.Silent),
 		})
-		CheckErr(err)
+		CheckErr(err, st.benchs...)
 	}
 }
 

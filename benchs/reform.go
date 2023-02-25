@@ -4,7 +4,7 @@ import (
 	"database/sql"
 
 	r "github.com/efectn/go-orm-benchmarks/benchs/reform"
-	_ "github.com/jackc/pgx/v4/stdlib"
+	_ "github.com/jackc/pgx/v5/stdlib"
 	"gopkg.in/reform.v1/dialects/postgresql"
 
 	reformware "gopkg.in/reform.v1"
@@ -35,7 +35,7 @@ func init() {
 		st.AddBenchmark("MultiRead limit 100", 200*OrmMulti, ReformReadSlice)
 
 		db, err := sql.Open("pgx", OrmSource)
-		CheckErr(err)
+		CheckErr(err, st.benchs...)
 
 		reform = reformware.NewDB(db, postgresql.Dialect, nil)
 	}

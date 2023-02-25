@@ -16,7 +16,7 @@ func init() {
 		st.AddBenchmark("MultiRead limit 100", 200*OrmMulti, BeegoOrmReadSlice)
 
 		err := orm.RegisterDataBase("default", "postgres", OrmSource, OrmMaxIdle, OrmMaxConn)
-		CheckErr(err)
+		CheckErr(err, st.benchs...)
 
 		orm.RegisterModel(new(Model))
 		bo = orm.NewOrm()

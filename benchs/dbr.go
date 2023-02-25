@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	dbrware "github.com/gocraft/dbr/v2"
-	_ "github.com/jackc/pgx/v4/stdlib"
+	_ "github.com/jackc/pgx/v5/stdlib"
 )
 
 var dbr *dbrware.Session
@@ -20,7 +20,7 @@ func init() {
 		st.AddBenchmark("MultiRead limit 100", 200*OrmMulti, DbrReadSlice)
 
 		conn, err := dbrware.Open("postgres", OrmSource, nil)
-		CheckErr(err)
+		CheckErr(err, st.benchs...)
 
 		dbr = conn.NewSession(nil)
 		dbr.Begin()

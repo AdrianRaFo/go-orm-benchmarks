@@ -1,7 +1,7 @@
 package benchs
 
 import (
-	_ "github.com/jackc/pgx/v4/stdlib"
+	_ "github.com/jackc/pgx/v5/stdlib"
 	godbware "github.com/samonzeweb/godb"
 	"github.com/samonzeweb/godb/adapters/postgresql"
 )
@@ -19,7 +19,7 @@ func init() {
 
 		var err error
 		godb, err = godbware.Open(postgresql.Adapter, OrmSource)
-		CheckErr(err)
+		CheckErr(err, st.benchs...)
 	}
 }
 

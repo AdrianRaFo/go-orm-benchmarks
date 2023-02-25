@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	models "github.com/efectn/go-orm-benchmarks/benchs/sqlboiler"
-	_ "github.com/jackc/pgx/v4/stdlib"
+	_ "github.com/jackc/pgx/v5/stdlib"
 	"github.com/volatiletech/sqlboiler/v4/boil"
 	"github.com/volatiletech/sqlboiler/v4/queries/qm"
 )
@@ -23,7 +23,7 @@ func init() {
 
 		var err error
 		sqlboiler, err = sql.Open("pgx", OrmSource)
-		CheckErr(err)
+		CheckErr(err, st.benchs...)
 
 		boil.SetDB(sqlboiler)
 	}

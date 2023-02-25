@@ -24,7 +24,7 @@ func init() {
 		})
 
 		err := pgdb.Ping(ctx)
-		CheckErr(err)
+		CheckErr(err, st.benchs...)
 	}
 }
 
